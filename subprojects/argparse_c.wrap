@@ -1,0 +1,9 @@
+
+[wrap-git]
+directory = argparse_c
+url = https://github.com/cofyc/argparse.git
+revision = master
+patch_directory = argparse_c
+
+[provide]
+argparse_c = argparse_c_dep
