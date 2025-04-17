@@ -1,0 +1,13 @@
+option(
+    'tests',
+    type: 'boolean',
+    value: true,
+    description: 'build tests',
+)
+
+option(
+    'libiconv_dll',
+    type: 'string',
+    value: '',
+    description: 'comma separated list (e.g. "iconv.dll,libiconv.dll"), this is used to get win32 dlls at runtime',
+)
