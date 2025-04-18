@@ -908,11 +908,16 @@
       "nowide:tests=true"
     ]
   },
-  "oatpp":{
+  "oatpp": {
     "_comment": "Some tests take really long",
     "test_options": [
       "--timeout-multiplier=3"
-    ]
+    ],
+    "build_on": {
+      "build_on": {
+        "alpine_riscv64": false
+      }
+    }
   },
   "openblas": {
     "_comment": "Doesn't work with windows native compilers",

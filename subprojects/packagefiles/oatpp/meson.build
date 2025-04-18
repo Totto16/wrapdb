@@ -7,12 +7,15 @@ project(
   meson_version: '>=1.3.0',
 )
 
+if host_machine.cpu_family() in ['riscv32', 'riscv64']
+  error(host_machine.cpu_family() + ' is not supported')
+endif
+
 oatpp_version = meson.project_version()
-oatpp_so_version = (oatpp_version.split('.').get(0) + '.' + oatpp_version.split(
-  '.',
-).get(
-  1,
-))
+oatpp_so_version = (oatpp_version.split('.').get(0)
++ '.'
++ oatpp_version.split('.').get(1)
+)
 
 flags = []
 
