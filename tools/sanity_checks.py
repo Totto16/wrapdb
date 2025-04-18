@@ -358,14 +358,17 @@ class TestReleases(unittest.TestCase):
             system = 'alpine'
         else:
             system = platform.system().lower()
+
+        system_with_arch = f'{system}_{platform.machine().lower()}'
         ci = self.ci_config.get(name, {})
         # kept for backwards compatibility
         expect_working = True
         if ci.get('linux_only', False) and not is_linux():
             expect_working = False
-        elif not ci.get('build_on', {}).get(system, True):
+        elif not ci.get("build_on", {}).get(system, True) or not ci.get(
+            "build_on", {}
+        ).get(system_with_arch, True):
             expect_working = False
-
         if deps:
             skip_deps = ci.get('skip_dependency_check', [])
             deps = [d for d in deps if d not in skip_deps]
