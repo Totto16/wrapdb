@@ -1,13 +1,15 @@
 project(
   'win-iconv',
   'c',
-  version: '0.0.8',
+  version: '0.0.9',
   meson_version: '>=1.1.0',
 )
 
 if host_machine.system() != 'windows'
-  error('win-iconv is only supported on windows, and not supported on '
-    + host_machine.system())
+  error(
+    'win-iconv is only supported on windows, and not supported on '
+    + host_machine.system(),
+  )
 endif
 
 cc = meson.get_compiler('c')
@@ -33,7 +35,11 @@ elif get_option('default_library') == 'shared'
   c_lib_args += '-DMAKE_DLL'
 endif
 
-src_files = files('win_iconv.c')
+src_files = files(
+  'iconv.h',
+  'localcharset.h',
+  'win_iconv.c',
+)
 
 iconv_lib = library(
   'iconv',
@@ -58,7 +64,7 @@ win_iconv = executable(
 )
 meson.override_find_program('win_iconv', win_iconv)
 
-install_headers('iconv.h')
+install_headers('iconv.h', 'localcharset.h')
 
 if get_option('tests')
   win_iconv_test_exe = executable('win_iconv_test', files('win_iconv_test.c'))
